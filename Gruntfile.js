@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   var yeomanConfig = {
     app: 'app',
     dist: 'dist',
-    componentName: 'alchemy-forms'
+    component: require('./dist/component.json').name
   };
 
   try {
@@ -113,7 +113,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/tables.scss' : [
+          'dist/<%= yeoman.component %>.scss' : [
             'component/styles/**/*.scss'
           ]
         }
@@ -130,9 +130,12 @@ module.exports = function (grunt) {
     concat: {
       dist: {
         files: {
-          'dist/alchemy-forms.js': [
+          'dist/<%= yeoman.component %>.js': [
             'component/templates/*.js', //must be first
             'component/scripts/**/*.js'
+          ],
+          'dist/<%= yeoman.component %>.css': [
+            '.tmp/styles/main.css'
           ]
         }
       }
@@ -163,9 +166,8 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          'dist/tables.css': [
-            '.tmp/styles/{,*/}*.css',
-            'app/styles/{,*/}*.css'
+          'dist/<%= yeoman.component %>.css': [
+            '.tmp/styles/{,*/}*.css'
           ]
         }
       }
@@ -299,7 +301,7 @@ module.exports = function (grunt) {
     'html2js',
     //'useminPrepare',
     //'imagemin',
-    'cssmin',
+    //'cssmin',
     'concat',
     'copy',
     //'cdnify',

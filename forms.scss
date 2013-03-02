@@ -1,6 +1,6 @@
 @import "alchemy/alchemy";
-@import "alchemy-forms/forms_vars";
-@import "alchemy-forms/forms_mixins";
+@import "forms_vars";
+@import "forms_mixins";
 
 /*
   =======================================
@@ -540,7 +540,7 @@
   RESPONSIVE
   =======================================
 */
-@import "alchemy/components/forms/forms_responsive";
+@import "forms_responsive";
 
 
 /*
@@ -548,4 +548,4 @@
   IE tweaks
   =======================================
 */
-@import "alchemy/components/forms/forms_ie";
+@import "forms_ie";

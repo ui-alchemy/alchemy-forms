@@ -5,7 +5,8 @@
   "dependencies": {
     "angular": "~1.0.5",
     "jquery": "~1.9.1",
-    "alchemy": ">=0.0.1"
+    "alchemy": ">=0.0.1",
+    "alchemy-buttons": ">=0.0.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",

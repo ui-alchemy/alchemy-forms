@@ -113,9 +113,6 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/<%= yeoman.component %>.scss' : [
-            'component/styles/**/*.scss'
-          ]
         }
       },
       server: {

@@ -1,9 +1,10 @@
 {
   "name": "alchemy-forms",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
-    "grunt": "0.4.0rc7",
+    "grunt": "~0.4.1",
+    "grunt-shell": "0.2.2",
     "grunt-contrib-copy": "0.4.0rc7",
     "grunt-contrib-concat": "0.1.2rc6",
     "grunt-contrib-coffee": "0.4.0rc7",
@@ -19,11 +20,13 @@
     "grunt-bower-hooks": "~0.2.0",
     "grunt-usemin": "~0.1.7",
     "grunt-regarde": "~0.1.1",
-    "gruntacular": "~0.1.1",
+    "grunt-karma": "~0.4.4",
     "grunt-open": "~0.1.0",
     "matchdep": "~0.1.1",
     "grunt-google-cdn": "~0.1.0",
-    "grunt-ngmin": "~0.0.1"
+    "grunt-ngmin": "~0.0.1",
+    "grunt-angular-templates": "~0.3.2",
+    "grunt-docular": "~0.1.1"
   },
   "engines": {
     "node": ">=0.8.0"

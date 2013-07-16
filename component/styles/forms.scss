@@ -28,7 +28,7 @@
  */
 .control_group,
 .control-group  {
-  padding: 5px 8px;
+  padding: .4em .7em;
   position: relative;
 
   .label,
@@ -40,9 +40,9 @@
     padding: 0;
 
     label {
-      line-height: 1;
+      line-height: 1.3;
       display: inline-block;
-      padding: 9px 20px 9px 3px;
+      padding: .75em 1.75em .75em .1em;
     }
   }
 
@@ -55,7 +55,7 @@
 }
 
 /**
- * @name Fielset
+ * @name Fieldset
  *
  * @description Defines a standard styling for fieldsets which serve as built-in input wrappers.
  *
@@ -65,14 +65,14 @@
 fieldset {
   border: 1px solid $fieldset_border_color;
   @include border-radius(5px);
-  padding: 0;
-  margin: 0 0 10px;
+  padding: 0 0 .5em;
+  margin: 0 0 .75em;
   background: $fieldset_background_color;
 
   legend {
     width: auto;
-    margin-left: 10px;
-    padding: 3px 5px;
+    margin-left: .75em;
+    padding: .1em .5em;
     color: $fieldset_text_color;
     @include background(linear-gradient(rgba(white, 1), rgba(white, 0) 90%));
   }
@@ -104,12 +104,13 @@ input[type="date"],
 input[type="number"],
 textarea {
   width: $input_width;
-  padding: 6px $input_padding;
+  padding: .5em $input_padding;
   color: inherit;
   outline: none;
   border: 1px solid $border_color;
   @include box-shadow(0 1px 2px 0 darken($shadow_color, 15%) inset);
   @include border-radius($border_radius);
+  font-size: inherit;
 
   &:hover {
     border-color: darken($border_color, 18%);
@@ -126,27 +127,27 @@ input[type="file"],
 input[type="range"] {
   width: auto;
   max-width: $input_width;
-  padding: 6px 0;
+  padding: .5em 0;
 }
 
 input[type="range"] {
   width: $input_width;
-  padding-top: 4px;
+  padding-top: .3em;
 }
 
 input[type="number"] {
   width: 50px;
   text-align: left;
-  padding: 4px $input_padding;
+  padding: .3em $input_padding;
 }
 
 select {
   min-width: $input_width/1.5;
   width: auto;
   max-width: $input_width;
-  padding: 4px 0 4px $input_padding;
+  padding: .45em $input_padding;
   position: relative;
-  top: 2px;
+  top: .1em;
   font-size: 100%;
   color: $text_color;
 
@@ -195,8 +196,8 @@ input:focus:-moz-placeholder {
     &:after {
       display: inline-block;
       position: absolute;
-      right: 11px;
-      top: 4px;
+      right: 0.9em;
+      top: .3em;
       font-size: 125%;
       font-weight: bold;
       content: '*';
@@ -223,7 +224,7 @@ input:focus:-moz-placeholder {
 .informative {
   display: inline-block;
   width: $input_width;
-  padding: 8px 0;
+  padding: .85em 0;
   line-height: 1.3;
   font-size: 100%;
   color: $readonly_text_color;
@@ -276,10 +277,10 @@ input[type="file"][disabled="disabled"] {
 .radio {
   .control {
     display: block;
-    padding: 1px 0 5px 0;
+    padding: .75em 1.75em 0 .1em;
 
     label {
-      padding-right: 15px;
+      padding-right: 1.25em;
     }
   }
 
@@ -289,7 +290,7 @@ input[type="file"][disabled="disabled"] {
 
   &.horizontal .control {
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0 .5em 0 0;
   }
 
   &:not(.inline) {
@@ -302,13 +303,12 @@ input[type="file"][disabled="disabled"] {
   input[type="checkbox"] {
     margin: 0 2px 0 0;
     position: relative;
-    top: 1px;
   }
 
   &.inline {
     .control {
       display: inline-block;
-      margin-left: 15px;
+      margin-left: 1.25em;
     }
   }
 }
@@ -322,7 +322,7 @@ input[type="file"][disabled="disabled"] {
  * .input-message the basic building block of all input messages
  * .label-help    displays a help message to the left of the label through a hoverable icon
  */
-.input-help,
+.input-help span,
 .input-note,
 .input-hint,
 .input-message {
@@ -332,16 +332,18 @@ input[type="file"][disabled="disabled"] {
   vertical-align: middle;
   font-size: 90%;
   white-space: normal;
+  padding: 0.875em $input_padding;
 }
 
+// -- HELP
 .input-help {
   i {
     display: inline-block;
     position: relative;
-    height: 13px;
-    width: 13px;
-    padding-top: 1px;
+    height: 1.25em;
+    width: 1.25em;
     text-align: center;
+    font-style: normal;
     color: $note_text_color;
     @include text-shadow(0 1px 0 rgba($white_color, 0.8));
     @include border-radius(50%);
@@ -368,11 +370,11 @@ input[type="file"][disabled="disabled"] {
       height: 0;
       width: 0;
       border-style: solid;
-      border-width: 0 9px 8px 9px;
+      border-width: 0 .75em .7em .75em;
       border-color: $transparent_white_color $transparent_white_color $dark_box_gradient;
       position: absolute;
-      bottom: -11px;
-      left: -2px;
+      bottom: -1em;
+      left: -0.2em;
       z-index: 2;
     }
   }
@@ -382,10 +384,9 @@ input[type="file"][disabled="disabled"] {
     @include opacity(0.97);
     position: absolute;
     left: 5px;
-    top: 33px;
+    top: 3em;
     z-index: 1;
     width: $left_column_width - 40px;
-    padding: 7px 10px 9px 10px;
     margin: 0;
     @include border-radius($border_radius);
     @include linear_gradient($dark_box_color, $dark_box_gradient, $dark_box_color, 20%);
@@ -413,7 +414,9 @@ input[type="file"][disabled="disabled"] {
   display: block;
   font-size: 85%;
   color: $note_text_color;
-  margin: 0 0 5px 10px;
+  margin: 0;
+  padding-top: 3px;
+  padding-bottom: 0;
 
   strong {
     font-weight: bold;
@@ -421,12 +424,12 @@ input[type="file"][disabled="disabled"] {
   }
 }
 
+// -- HINTS & MESSAGES
 .input-hint,
 .input-message {
   position: relative;
   left: 0;
   color: $message_text_color;
-  padding: 9px $input_padding 7px $input_padding;
   margin-left: 10px;
   @include linear_gradient($light_box_color, $light_box_gradient, $light_box_color, 30%);
   @include filter-gradient($light_box_gradient, $light_box_color);
@@ -445,7 +448,7 @@ input[type="file"][disabled="disabled"] {
     border-width: 8px 8px 8px 0;
     border-color: $transparent_white_color $light_box_color $transparent_white_color;
     position: absolute;
-    top: 14px;
+    top: 15px;
     left: -8px;
     margin-top: -8px; // half size of triangle
     z-index: 2;
@@ -458,6 +461,7 @@ input[type="file"][disabled="disabled"] {
   }
 }
 
+// -- HINT
 .input-hint {
   @include opacity(0);
   position: absolute;
@@ -471,6 +475,7 @@ input[type="file"][disabled="disabled"] {
   }
 }
 
+// -- MESSAGE
 .input-message ~ .input-hint {
   display: none;
 }

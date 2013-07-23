@@ -2,7 +2,7 @@
   .control_group,
   .control-group {
     .control-input {
-      margin: 0 0 5px 0;
+      margin: 0 0 0.25em 0;
     }
 
     .label,
@@ -89,7 +89,7 @@
     position: relative;
     left: 0;
     @include opacity(1);
-    margin: 3px 0 0 0;
+    margin: 0.25em 0 0 0;
 
     &:before,
     &:after {
@@ -113,7 +113,7 @@
 
   .control_group,
   .control-group{
-    input:focus ~ .hint {
+    input:focus ~ .input-hint {
       left: 0;
     }
   }

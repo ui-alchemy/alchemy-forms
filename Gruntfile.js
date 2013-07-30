@@ -1,4 +1,6 @@
 'use strict';
+
+
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -6,39 +8,38 @@ var mountFolder = function (connect, dir) {
 
 module.exports = function (grunt) {
   // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').concat(['gruntacular']).forEach(grunt.loadNpmTasks);
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   // configurable paths
   var yeomanConfig = {
-    app: 'app',
+    demo: 'demo',
     dist: 'dist',
-    component: require('./dist/component.json').name
+    component: require('./bower.json').name
   };
 
   try {
-    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+    yeomanConfig.demo = require('./bower.json').demoPath || yeomanConfig.demo;
   } catch (e) {}
 
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
       compass: {
-        files: ['app/styles/{,*/}*.{scss,sass}', 'component/styles/{,*/}*.{scss,sass}'],
+        files: ['demo/styles/{,*/}*.{scss,sass}', 'component/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
       },
       templates: {
-        files: ['component/templates/*.html', 'app/views/*.html'],
-        tasks: 'html2js:directives'
+        files: ['component/templates/*.html', 'demo/views/*.html']
       },
       livereload: {
         files: [
-          'app/{,*/}*.html',
+          'demo/{,*/}*.html',
           'component/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          'app/styles/{,*/}*.scss',
-          'app/scripts/{,*/}*.js',
+          'demo/styles/{,*/}*.scss',
+          'demo/scripts/{,*/}*.js',
           'component/scripts/{,*/}*.js',
-          'app/images/{,*/}*.{png,jpg,jpeg}'
+          'demo/images/{,*/}*.{png,jpg,jpeg}'
         ],
         tasks: ['livereload']
       }
@@ -54,7 +55,7 @@ module.exports = function (grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, ''),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, yeomanConfig.demo)
             ];
           }
         }
@@ -90,29 +91,32 @@ module.exports = function (grunt) {
         'component/scripts/{,*/}*.js'
       ]
     },
-    testacular: {
+    karma: {
       unit: {
-        configFile: 'testacular.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true
       },
       ci: {
-        configFile: 'testacular.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true,
         browsers: ['PhantomJS', 'Firefox']
       }
     },
     compass: {
       options: {
-        sassDir: 'app/styles',
+        sassDir: './',
         cssDir: '.tmp/styles',
-        imagesDir: 'app/images',
-        javascriptsDir: 'app/scripts',
-        fontsDir: 'app/styles/fonts',
-        importPath: ['app/components', 'component/styles'],
+        imagesDir: 'demo/images',
+        javascriptsDir: 'demo/scripts',
+        fontsDir: 'demo/styles/fonts',
+        importPath: ['demo/components', 'component/styles'],
         relativeAssets: true
       },
       dist: {
         files: {
+          'dist/<%= yeoman.component %>.scss' : [
+            'component/styles/**/*.scss'
+          ]
         }
       },
       server: {
@@ -121,43 +125,25 @@ module.exports = function (grunt) {
         }
       }
     },
-    html2js: {
-      directives: ['component/templates/*.html', 'app/views/*.html'],
+    ngtemplates: {
+      build: {
+        options: {
+          base: 'component/templates',
+          prepend: 'component/templates/',
+          module: 'alch-templates'
+        },
+        src: ['component/templates/*.html'],
+        dest: '.tmp/templates/<%= yeoman.component %>.templates.js'
+      }
     },
     concat: {
       dist: {
         files: {
           'dist/<%= yeoman.component %>.js': [
-            'component/templates/*.js', //must be first
+            '.tmp/templates/*.js', //must be first
             'component/scripts/**/*.js'
-          ],
-          'dist/<%= yeoman.component %>.css': [
-            '.tmp/styles/main.css'
           ]
         }
-      }
-    },
-    useminPrepare: {
-      html: 'app/index.html',
-      options: {
-        dest: 'dist'
-      }
-    },
-    usemin: {
-      html: ['dist/{,*/}*.html'],
-      css: ['dist/styles/{,*/}*.css'],
-      options: {
-        dirs: ['dist']
-      }
-    },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: 'app/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: 'dist/images'
-        }]
       }
     },
     cssmin: {
@@ -167,32 +153,6 @@ module.exports = function (grunt) {
             '.tmp/styles/{,*/}*.css'
           ]
         }
-      }
-    },
-    htmlmin: {
-      dist: {
-        options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
-        },
-        files: [{
-          expand: true,
-          cwd: 'app',
-          src: ['*.html', 'views/*.html'],
-          dest: 'dist'
-        }]
-      }
-    },
-    cdnify: {
-      dist: {
-        html: ['dist/*.html']
       }
     },
     ngmin: {
@@ -208,8 +168,8 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'dist/scripts/scripts.js': [
-            'dist/scripts/scripts.js'
+          'dist/<%= yeoman.component %>.min.js': [
+            'dist/*.js'
           ],
         }
       }
@@ -219,7 +179,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: 'app',
+          cwd: 'demo',
           dest: 'dist',
           src: [
             '*.{ico,txt}',
@@ -236,27 +196,147 @@ module.exports = function (grunt) {
           ]
         }]
       }
+    },
+    releaseTask: {},
+    checkVersion: {},
+    docular: {
+      groups: [{
+        groupTitle: 'Alchemy',
+        groupId: 'alchemy',
+        sections: [{
+          id: '<%= yeoman.component %>',
+          title: 'Base',
+          scripts: ['component/scripts/']
+        }]
+      }],
+      showDocularDocs: false,
+      showAngularDocs: false
     }
   });
 
-  var escapeContent = function(content) {
-    return content.replace(/"/g, '\\"').replace(/\n/g, '" +\n    "');
-  };
+  grunt.registerTask('checkVersion', 'Checks the version attempting to be built against previously built versions.', function() {
+    var done = this.async(),
+        version = grunt.file.readJSON('./bower.json').version,
 
-  grunt.registerMultiTask('html2js', 'Generate js version of html template.', function() {
-    var files = grunt._watch_changed_files || grunt.file.expand(this.data);
+        fetchTags = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['fetch', '--tags']
+            }, function(err, result) {
+                if (err) {
+                    grunt.fail.fatal(result.stdout);
+                    done(false);
+                } else {
+                    checkVersion();
+                }
+            });
+        },
 
-    files.forEach(function(file) {
-      var content  = escapeContent(grunt.file.read(file)),
-          template = '';
+        checkVersion = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['tag']
+            }, function(err, result) {
+                if (result.stdout.indexOf(version) !==  -1) {
+                    grunt.fail.fatal('The version you are trying to create a release for already exists. Please bump bower.json, commit and try again.');
+                    done(false);
+                } else {
+                    done();
+                }
+            });
+        };
 
-      template += 'angular.module("alch-templates").run(function($templateCache) {\n';
-      template += '  $templateCache.put("' + file + '",\n';
-      template += '    "' + content + '");\n';
-      template += '});\n';
+    grunt.log.writeln('Fetching remote tags.');
+    fetchTags();
+  });
 
-      grunt.file.write(file + '.js', template);
-    });
+  grunt.registerTask('releaseTask', 'Creates a release branch based off of the dist directory.', function() {
+    var done = this.async(),
+        version = grunt.file.readJSON('./bower.json').version,
+
+        copyComponentFile = function() {
+            grunt.util.spawn({
+                cmd: 'cp',
+                args: ['bower.json', 'dist/']
+            }, function(err, result) {
+                if (!err) {
+                    grunt.log.writeln('Component file copied to build directory.');
+                    checkoutRelease();
+                } else {
+                    grunt.log.error(result.stdout);
+                    done(false);
+                }
+            });
+        },
+
+        checkoutRelease = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['checkout', 'release']
+            }, function(err, result) {
+                if (!err) {
+                    grunt.log.writeln('Release branch checked out.');
+                    copyBuild();
+                } else {
+                    grunt.log.error(result.stdout);
+                    done(false);
+                }
+            });
+        },
+
+        copyBuild = function() {
+            grunt.file.recurse('dist/', function(abspath, rootdir, subdir, filename) {
+                grunt.file.copy(abspath, rootdir + '../' + filename);
+            });
+            addFiles();
+        },
+
+        addFiles = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['add', './']
+            }, function(err, result) {
+                if (!err) {
+                    grunt.log.writeln('Added any new files to release.');
+                    commitBuild();
+                } else {
+                    grunt.log.error(result.stdout);
+                    done(false);
+                }
+            });
+        },
+
+        commitBuild = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['commit', '-a', '-m', 'Automatic commit of build at [' + version + ']']
+            }, function(err, result) {
+                if (!err) {
+                    grunt.log.writeln('Automatic commit of build at [' + version + ']');
+                    tagRelease();
+                } else {
+                    grunt.log.error(result.stdout);
+                    done(false);
+                }
+            });
+        },
+
+        tagRelease = function() {
+            grunt.util.spawn({
+                cmd: 'git',
+                args: ['tag', version]
+            }, function(err, result) {
+                if (!err) {
+                    grunt.log.writeln('Tagging release.');
+                    done();
+                } else {
+                    grunt.log.error(result.stdout);
+                    done(false);
+                }
+            });
+        };
+
+    copyComponentFile();
   });
 
   grunt.renameTask('regarde', 'watch');
@@ -266,7 +346,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', [
     'clean:server',
     'compass:server',
-    'html2js',
+    'ngtemplates',
     'livereload-start',
     'connect:livereload',
     'open',
@@ -274,20 +354,21 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', function(arg1){
-    var task_list = [
+    var taskList = [
       'clean:server',
       'compass',
-      'html2js',
+      'ngtemplates',
+      'jshint',
       'connect:test'
     ];
 
     if (arg1 === 'ci') {
-      task_list.push('testacular:ci');
+      taskList.push('karma:ci');
     } else {
-      task_list.push('testacular:unit');
+      taskList.push('karma:unit');
     }
 
-    grunt.task.run(task_list);
+    grunt.task.run(taskList);
   });
 
   grunt.registerTask('build', [
@@ -295,16 +376,17 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'compass:dist',
-    'html2js',
-    //'useminPrepare',
-    //'imagemin',
-    //'cssmin',
+    'ngtemplates',
     'concat',
     'copy',
-    //'cdnify',
-    //'usemin',
-    //'ngmin',
-    //'uglify'
+    'ngmin',
+    'uglify'
+  ]);
+
+  grunt.registerTask('release', [
+    'checkVersion',
+    'build',
+    'releaseTask'
   ]);
 
   grunt.registerTask('default', ['build']);

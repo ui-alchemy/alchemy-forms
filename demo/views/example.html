@@ -1,0 +1,234 @@
+<section>
+  <h2>Form Example</h2>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="preview_name">Name and surname</label>
+    </div>
+    <div class="control-input">
+      <input id="preview_name" type="text">
+      <span class="input-hint">The length should be between 1-50 characters.</span>
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label input-help">
+      <i>?</i>
+      <label for="preview_login">Login name</label>
+      <span>You can fill in your own login name, otherwise your <nobr>e-mail</nobr> will be used as a login information.</span>
+    </div>
+    <div class="control-input">
+      <input id="preview_login" type="text">
+      <span class="input-hint">The length should be between 1-15 characters.</span>
+    </div>
+  </div>
+
+  <div class="control-group required">
+    <div class="control-label">
+      <label for="preview_email">E-mail</label>
+    </div>
+    <div class="control-input">
+      <input id="preview_email" required="required" type="email">
+    </div>
+  </div>
+  <div class="control-group required">
+
+    <div class="control-label">
+      <label for="preview_password">Password</label>
+    </div>
+    <div class="control-input">
+      <input id="preview_password" required="required" type="password">
+      <span class="input-hint">You need to use at least one capital letter, one digit and one special character (such as "." "," "_" "-"). The length should be between 1-15 characters.</span>
+    </div>
+  </div>
+
+  <div class="control-group required">
+    <div class="control-label">
+      <label for="preview_password_confirm">Password confirmation</label>
+    </div>
+    <div class="control-input">
+      <input id="preview_password_confirm" required="required" type="password">
+      <span class="input-hint">Please re-type your password.</span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label">
+      <label for="info-label">Info Label</label>
+    </div>
+    <div class="control-input">
+      <span class="informative">Please re-type your password.</span>
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="preview_name">Super Long Label To Demonstrate What Happens</label>
+    </div>
+    <div class="control-input">
+      <input id="preview_name" type="text">
+      <span class="input-hint">The length should be between 1-50 characters.</span>
+    </div>
+  </div>
+
+  <div class="control-group buttons">
+    <div class="control-label"></div>
+    <div class="control-input">
+      <input class="btn primary" type="submit" value="Save">
+      <a class="btn" href="#">
+        Cancel
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <h2>Fieldset Example</h2>
+  <form class="form">
+    <fieldset>
+      <legend>Fieldset Legend</legend>
+        <div class="control-group">
+          <div class="control-label">
+            <label for="preview_name">Simple Input</label>
+          </div>
+          <div class="control-input">
+            <input id="preview_name" type="text">
+          </div>
+        </div>
+    </fieldset>
+  </form>
+</section>
+
+
+<section>
+  <h2>Available Form Inputs</h2>
+  <div class="control-group">
+    <div class="control-label input-help">
+      <i>?</i>
+      <label for="input_default_input_01">First row</label>
+      <span>Here will be placed explanatory information about concrete label term. In this case it would be for "Text input". What is Text input?</span>
+    </div>
+    <div class="control-input">
+      <input id="input_default_input_01" placeholder="Placeholder" type="text">
+      <span class="input-hint">Fill in your given name. Maximum allowed length is up to 30 characters. (Hint length is max 2 lines)</span>
+      <span class="input-note">This is note, which is visible all the time. Can be longer than one line. Don't use if not necessary.</span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label">
+      <label for="single_select_default_input_01">First row</label>
+    </div>
+    <div class="control-input">
+      <select id="single_select_default_input_01">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+      <span class="input-hint">Here is example of hint and how it will behave when changing the layout.</span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label">
+      <label for="multiple_select_default_input_01">First row</label>
+    </div>
+    <div class="control-input">
+      <select id="multiple_select_default_input_01" multiple="">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+      <span class="input-hint">Here is example of hint and how it will behave when changing the layout.</span>
+    </div>
+  </div>
+
+  <div class="control_group checkbox horizontal">
+    <div class="control-label">
+      <label>Checkbox</label>
+    </div>
+    <div class="control-input">
+      <div class="control">
+        <input id="checkbox_default_input_01" type="checkbox">
+        <label for="checkbox_default_input_01">Check me</label>
+      </div>
+     <div class="control">
+        <input id="checkbox_default_input_02" type="checkbox">
+        <label for="checkbox_default_input_02">Check me</label>
+      </div>
+      <div class="control">
+        <input id="checkbox_default_input_03" type="checkbox">
+        <label for="checkbox_default_input_03">Check me</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="control_group checkbox">
+    <div class="control-label">
+      <label>Radio</label>
+    </div>
+    <div class="control-input">
+      <div class="control">
+        <input id="radio_default_input_01" type="radio" name="radio">
+        <label for="radio_default_input_01">Pick me</label>
+      </div>
+     <div class="control">
+        <input id="radio_default_input_02" type="radio" name="radio">
+        <label for="radio_default_input_02">Pick me</label>
+      </div>
+      <div class="control">
+        <input id="radio_default_input_03" type="radio" name="radio">
+        <label for="radio_default_input_03">Pick me</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="textarea_default_input_01">Textarea</label>
+    </div>
+    <div class="control-input">
+      <textarea id="textarea_default_input_01"></textarea>
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="file_default_input_01">File</label>
+    </div>
+    <div class="control-input">
+      <input id="file_default_input_01" type="file">
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="date_default_input_01">Date</label>
+    </div>
+    <div class="control-input">
+      <input id="date_default_input_01" type="date">
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="number_default_input_01">Number</label>
+    </div>
+    <div class="control-input">
+      <input id="number_default_input_01" type="number">
+    </div>
+  </div>
+
+  <div class="control_group">
+    <div class="control-label">
+      <label for="range_default_input_01">Range</label>
+    </div>
+    <div class="control-input">
+      <input id="range_default_input_01" max="20" min="0" type="range" value="0">
+    </div>
+  </div>
+
+
+
+</section>
